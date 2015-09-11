@@ -1,22 +1,38 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Dice extends PApplet {
+
 Die bob;
-void setup()
+public void setup()
 {
-	size(325, 400);
+	size(800, 800);
 	noLoop();
 
 }
-void draw()
+public void draw()
 {
 
-	for (int y = 0; y<=325; y+=110){
-		for (int x = 0; x <= 325; x+=110){
+	for (int y = 0; y<=340; y+=110){
+		for (int x = 0; x <= 340; x+=110){
 			bob = new Die(x, y);
 			bob.roll();
 			bob.show();
 		}
 	}
 }
-void mousePressed()
+public void mousePressed()
 {
 	redraw();
 }
@@ -32,11 +48,11 @@ class Die //models one single dice cube
 		myX = x;
 		myY = y;
 	}
-	void roll()
+	public void roll()
 	{
-		randomNum = (int)(Math.random()*6+1);
+		randomNum = 1;// (int)(Math.random()*6+1);
 	}
-	void show()
+	public void show()
 	{
 		stroke(0);
 		fill(255);
@@ -52,12 +68,12 @@ class Die //models one single dice cube
 			ellipse(myX+20, myY+20, 20, 20);
 			ellipse(myX+80, myY+80, 20, 20);
 		}
-		else if(randomNum == 3)
+		else if (randomNum ==3)
 		{
 			fill(0);
 			ellipse(myX+20, myY+20, 20, 20);
 			ellipse(myX+50, myY+50, 20, 20);
-			ellipse(myX+80, myY+80, 20, 20);
+			ellipse(myX+80, myX+80, 20, 20);
 		}
 		else if (randomNum ==4)
 		{
@@ -87,4 +103,13 @@ class Die //models one single dice cube
 			ellipse(myX+80, myY+50, 20, 20);
 		}
 	}
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Dice" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
 }
